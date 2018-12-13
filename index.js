@@ -5,7 +5,11 @@ app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
 
 app.get('/', function(request, response) {
-  response.send('Hello World!')
+  if (request.get('Authorization') == 'Bearer test_api_key') {
+    response.send('Vous avez envoyé correctement les headers !')
+  } else {
+    response.send('Erreur, mauvais headers !')
+  }
 })
 
 app.listen(app.get('port'), function() {
